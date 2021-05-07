@@ -1,3 +1,8 @@
+// default number of boxes, rows and cols
+const numberDefault = 1500
+const defaultCols = 50
+const defaultRows = 30
+
 // select all color buttons
 const btnsColors = document.querySelectorAll(".btn-color");
 
@@ -19,19 +24,19 @@ btnsColors.forEach(button => {
 })
 
 // generate boxes
-addAllBtns(1500)
+addAllBtns(numberDefault)
 
 // select boxes
 let boxes = document.querySelectorAll(".box")
 
 // select reset button
-const resetBtn = document.querySelector(".btn-reset")
+const resetBtn = document.querySelector("#reset")
 
 // event listener for reset btn
 resetBtn.addEventListener("click", () => {
     // get information about wanted rows and cols
-    let rows = window.prompt("Please enter number of rows. \nDefault: 30")
-    let columns = window.prompt("Please enter number of columns. \nDefault: 50")
+    let rows = window.prompt(`Please enter number of rows. \nDefault-rows: ${defaultRows}\nMax-product: 2000\nMin-rows: 1`)
+    let columns = window.prompt(`Please enter number of columns. \nDefault-cols: ${defaultCols}\nMax-product: 2000\nMin-rows: 1`)
     // update grid templates
     container.setAttribute("style", `width: 80%; height: 80%; background-color: #ffffff; display: grid; grid-template-columns: repeat(${columns}, 1fr); grid-template-rows: repeat(${rows}, 1fr);`)
     // remove old btns
@@ -41,6 +46,13 @@ resetBtn.addEventListener("click", () => {
     addAllBtns(numberOfBtns)
     // update boxes variable
     boxes = document.querySelectorAll(".box")
+})
+
+// event listener for clear btn
+const clearBtn = document.querySelector("#clear")
+
+clearBtn.addEventListener("click", () => {
+    clearGrid()
 })
 
 // function for removing all btns
@@ -53,8 +65,11 @@ function removeAllBtns () {
 
 // function for generating new btns 
 function addAllBtns(number) {
-    // set a default value if input is omitted
-    if (!number) {number=1500}
+    // set a default value if input is omitted or number is too big
+    if (number <= 0 || number > 2000) {
+        number = numberDefault
+        container.setAttribute("style", `width: 80%; height: 80%; background-color: #ffffff; display: grid; grid-template-columns: repeat(${defaultCols}, 1fr); grid-template-rows: repeat(${defaultRows}, 1fr);`)
+    }
     for (let i=0; i<(number); i++) {
         let box = document.createElement("div")
         box.classList.add("box")
@@ -64,10 +79,16 @@ function addAllBtns(number) {
 
 // function that adds to each element hover event listener and change bg
 function hoverListener(list, color) {
-    console.log(list)
     list.forEach(elem => {
         elem.addEventListener("mouseover", () => {
             elem.style.backgroundColor = color
         })
+    })
+}
+
+// function that clears the grid from colors
+function clearGrid() {
+    boxes.forEach(box => {
+        box.style.backgroundColor = "white"
     })
 }

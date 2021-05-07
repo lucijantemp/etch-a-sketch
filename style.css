@@ -59,14 +59,14 @@ h4 {
     border: 1px solid black;
 }
 
-.btn-reset {
+.btn-option {
     width: 80px;
     height: 45px;
-    border-radius: 10%;
+    border-radius: 50%;
     border: 1px solid black;
+    letter-spacing: 0.01rem;
 }
 
 .box {
-    /* border: 1px solid black; */
+    border: 0.1px solid rgb(200, 200, 200);
 }
-
