@@ -1,7 +1,8 @@
-// default number of boxes, rows and cols
+// default number of boxes, rows, cols and max product
 const numberDefault = 1500
 const defaultCols = 50
 const defaultRows = 30
+const maxProduct = 5000
 
 // select all color buttons
 const btnsColors = document.querySelectorAll(".btn-color");
@@ -35,8 +36,8 @@ const resetBtn = document.querySelector("#reset")
 // event listener for reset btn
 resetBtn.addEventListener("click", () => {
     // get information about wanted rows and cols
-    let rows = window.prompt(`Please enter number of rows. \nDefault-rows: ${defaultRows}\nMax-product: 2000\nMin-rows: 1`)
-    let columns = window.prompt(`Please enter number of columns. \nDefault-cols: ${defaultCols}\nMax-product: 2000\nMin-rows: 1`)
+    let rows = window.prompt(`Please enter number of rows. \nDefault-rows: ${defaultRows}\nMax-product: ${maxProduct}\nMin-rows: 1`)
+    let columns = window.prompt(`Please enter number of columns. \nDefault-cols: ${defaultCols}\nMax-product: ${maxProduct}\nMin-rows: 1`)
     // update grid templates
     container.setAttribute("style", `width: 80%; height: 80%; background-color: #ffffff; display: grid; grid-template-columns: repeat(${columns}, 1fr); grid-template-rows: repeat(${rows}, 1fr);`)
     // remove old btns
@@ -66,7 +67,7 @@ function removeAllBtns () {
 // function for generating new btns 
 function addAllBtns(number) {
     // set a default value if input is omitted or number is too big
-    if (number <= 0 || number > 2000) {
+    if (number <= 0 || number > maxProduct) {
         number = numberDefault
         container.setAttribute("style", `width: 80%; height: 80%; background-color: #ffffff; display: grid; grid-template-columns: repeat(${defaultCols}, 1fr); grid-template-rows: repeat(${defaultRows}, 1fr);`)
     }
