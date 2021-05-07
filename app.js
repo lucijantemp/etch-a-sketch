@@ -19,7 +19,7 @@ btnsColors.forEach(button => {
 })
 
 // generate boxes
-addAllBtns(800)
+addAllBtns(1500)
 
 // select boxes
 let boxes = document.querySelectorAll(".box")
@@ -30,10 +30,10 @@ const resetBtn = document.querySelector(".btn-reset")
 // event listener for reset btn
 resetBtn.addEventListener("click", () => {
     // get information about wanted rows and cols
-    let rows = window.prompt("Please enter number of rows.")
-    let columns = window.prompt("Please enter number of columns.")
+    let rows = window.prompt("Please enter number of rows. \nDefault: 30")
+    let columns = window.prompt("Please enter number of columns. \nDefault: 50")
     // update grid templates
-    container.setAttribute("style", `width: 80%; height: 80%; background-color: #ffffff; border: 3px dotted black; display: grid; grid-template-columns: repeat(${columns}, 1fr); grid-template-rows: repeat(${rows}, 1fr);`)
+    container.setAttribute("style", `width: 80%; height: 80%; background-color: #ffffff; display: grid; grid-template-columns: repeat(${columns}, 1fr); grid-template-rows: repeat(${rows}, 1fr);`)
     // remove old btns
     removeAllBtns()
     // generate new btns
@@ -53,6 +53,8 @@ function removeAllBtns () {
 
 // function for generating new btns 
 function addAllBtns(number) {
+    // set a default value if input is omitted
+    if (!number) {number=1500}
     for (let i=0; i<(number); i++) {
         let box = document.createElement("div")
         box.classList.add("box")
