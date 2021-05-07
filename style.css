@@ -28,12 +28,23 @@ main {
     background-image: linear-gradient(90deg, #F2994A, #F2C94C);
 }
 
+button {
+    transition: transform 250ms;
+}
+
+button:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
 .container {
     width: 80%;
     height: 80%;
     background-color: #ffffff;
     border: 3px dotted black;
-    opacity: 0.7;
+    display: grid;
+    grid-template-columns: repeat(40, 1fr);
+    grid-template-rows: repeat(20, 1fr);
 }
 
 .btn-color {
@@ -50,11 +61,9 @@ main {
     border: 1px solid black;
 }
 
-button {
-    transition: transform 500ms;
+.box {
+    /* width: 10%; */
+    /* height: 10%; */
+    border: 1px solid black;
 }
 
-button:hover {
-    cursor: pointer;
-    transform: scale(1.2);
-}
