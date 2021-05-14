@@ -2,7 +2,7 @@
 const numberDefault = 1500
 const defaultCols = 50
 const defaultRows = 30
-const maxProduct = 5000
+const maxProduct = 10000
 
 // select all color buttons
 const btnsColors = document.querySelectorAll(".btn-color");
