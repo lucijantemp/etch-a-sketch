@@ -70,3 +70,16 @@ h4 {
 .box {
     /* border: 0.1px solid rgb(200, 200, 200); */
 }
+
+@media all and (max-width: 900px) {
+    h4 {
+        font-size: 1rem;
+    }
+    .btn-color {
+        width: 40px;
+        height: 40px;
+    }
+    .btn-option {
+        width: 45px;
+    }
+}
