@@ -7,7 +7,7 @@ const defaultRows = 30
 const maxProduct = 10000
 
 // select all color buttons
-const btnsColors = document.querySelectorAll(".btn-color");
+const colorBtns = document.querySelectorAll(".btn-color");
 
 // select container for boxes
 const container = document.querySelector(".container")
@@ -15,6 +15,7 @@ const container = document.querySelector(".container")
 // select feature btns
 const resetBtn = document.querySelector("#reset")
 const clearBtn = document.querySelector("#clear")
+const fillBtn  = document.querySelector("#fill")
 
 // used color (will dynamicly change)
 let usedColor = "black"
@@ -24,11 +25,15 @@ let usedColor = "black"
 // ---SETUP--- (generating btns and boxes dynamicly)
 
 // color btns (generating and functionality)
-btnsColors.forEach(button => {
+colorBtns.forEach(button => {
     button.style.backgroundColor = button.id
     // change used color when clicked
     button.addEventListener("click", () => {
         usedColor = button.id
+        // unselect previous btn and select new
+        let selectedBtn = document.querySelector(".btn-active")
+        if (selectedBtn) { selectedBtn.classList.remove("btn-active") }
+        button.classList.add("btn-active")
         // update hover listener for boxes
         hoverListener(usedColor)
     })
@@ -57,7 +62,12 @@ resetBtn.addEventListener("click", () => {
 
 // CLEAR btn
 clearBtn.addEventListener("click", () => {
-    clearGrid()
+    fillGrid("#ffffff")
+})
+
+// FILL btn
+fillBtn.addEventListener("click", () => {
+    fillGrid(usedColor)
 })
 
 
@@ -98,9 +108,9 @@ function hoverListener(color) {
 }
 
 // function that clears the grid from colors
-function clearGrid() {
+function fillGrid(color) {
     let boxes = document.querySelectorAll(".box")
     boxes.forEach(box => {
-        box.style.backgroundColor = "white"
+        box.style.backgroundColor = color
     })
 }
