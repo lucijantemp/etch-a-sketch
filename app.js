@@ -56,7 +56,7 @@ resetBtn.addEventListener("click", () => {
     let rows = window.prompt(`Please enter number of rows. \nDefault-rows: ${defaultRows}\nMax-product: ${maxProduct}\nMin-rows: 1`)
     let cols = window.prompt(`Please enter number of columns. \nDefault-cols: ${defaultCols}\nMax-product: ${maxProduct}\nMin-rows: 1`)
     // update grid templates
-    container.setAttribute("style", `width: 80%; height: 80%; background-color: #ffffff; display: grid; grid-template-columns: repeat(${cols}, 1fr); grid-template-rows: repeat(${rows}, 1fr);`)
+    container.setAttribute("style", `width: 95vw; height: 100vh; background-color: #ffffff; display: grid; grid-template-columns: repeat(${cols}, 1fr); grid-template-rows: repeat(${rows}, 1fr);`)
     // remove old boxes
     removeAllBoxes()
     // generate new boxes
@@ -110,7 +110,7 @@ function addAllBoxes(rows, cols) {
     // set a default value if input is omitted or number is too big
     if (number <= 0 || number > maxProduct) {
         number = numberDefault
-        container.setAttribute("style", `width: 80%; height: 80%; background-color: #ffffff; display: grid; grid-template-columns: repeat(${defaultCols}, 1fr); grid-template-rows: repeat(${defaultRows}, 1fr);`)
+        container.setAttribute("style", `width: 95vw; height: 100vh; background-color: #ffffff; display: grid; grid-template-columns: repeat(${defaultCols}, 1fr); grid-template-rows: repeat(${defaultRows}, 1fr);`)
     }
     for (let i=0; i<(number); i++) {
         let box = document.createElement("div")
