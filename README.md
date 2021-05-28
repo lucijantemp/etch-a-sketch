@@ -1,5 +1,3 @@
 # etch-a-sketch
-This project was part of the odin project. It is a web application that allows client to pick a color and 
-draw on pixelated grid system by hovering grid boxes with mouse.
-User has option to reset grid with reset button and modify grid to fit his needs.
-Also there is a fill button and change mode that is not done yet.
+This is a simple etch-a-sketch website. It is not fully completed, but main idea is done. 
+I will add mobile accessability and some more features in near future.
