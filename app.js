@@ -16,9 +16,13 @@ const container = document.querySelector(".container")
 const resetBtn = document.querySelector("#reset")
 const clearBtn = document.querySelector("#clear")
 const fillBtn  = document.querySelector("#fill")
+const switchBtn = document.querySelector("#switch")
 
-// used color (will dynamicly change)
-let usedColor = "black"
+// current color and mode (will dynamicly change)
+let currentColor = "black"
+let currentMode = "fadeIn"
+const modes = ["default", "fadeIn", "random"]
+
 
 
 
@@ -29,13 +33,13 @@ colorBtns.forEach(button => {
     button.style.backgroundColor = button.id
     // change used color when clicked
     button.addEventListener("click", () => {
-        usedColor = button.id
+        currentColor = button.id
         // unselect previous btn and select new
         let selectedBtn = document.querySelector(".btn-active")
         if (selectedBtn) { selectedBtn.classList.remove("btn-active") }
         button.classList.add("btn-active")
         // update hover listener for boxes
-        hoverListener(usedColor)
+        hoverListener(currentColor)
     })
 })
 
@@ -57,7 +61,8 @@ resetBtn.addEventListener("click", () => {
     removeAllBoxes()
     // generate new boxes
     addAllBoxes(rows, cols)
-    // update boxes variable
+    // update hover listener
+    hoverListener(currentColor)
 })
 
 // CLEAR btn
@@ -67,7 +72,26 @@ clearBtn.addEventListener("click", () => {
 
 // FILL btn
 fillBtn.addEventListener("click", () => {
-    fillGrid(usedColor)
+    fillGrid(currentColor)
+})
+
+// SWITCH btn
+switchBtn.addEventListener("click", () => {
+    // switch mode variable to next mode
+    let currIndex = modes.indexOf(currentMode)
+    let nextIndex = currIndex + 1
+    if (nextIndex >= modes.length) {
+        nextIndex = 0
+    } 
+    currentMode = modes[nextIndex]
+
+    document.querySelector(".mode").innerHTML = currentMode
+
+    let boxes = document.querySelectorAll(".box")
+    // remove all modes classes
+    boxes.forEach(box => {
+        box.classList.remove("fade-in")
+    })
 })
 
 
@@ -99,10 +123,24 @@ function addAllBoxes(rows, cols) {
 
 // function that adds to each element hover event listener and change bg
 function hoverListener(color) {
+    // select boxes
     let boxes = document.querySelectorAll(".box")
-    boxes.forEach(elem => {
-        elem.addEventListener("mouseover", () => {
-            elem.style.backgroundColor = color
+    boxes.forEach(box => {
+        box.addEventListener("mouseover", () => {
+            // mode: classic
+            if (currentMode == "default") {
+                box.style.backgroundColor = color
+            }
+            // mode: fadeIn
+            else if (currentMode == "fadeIn") {
+                box.style.backgroundColor = color
+                box.classList.add("fade-in")
+            }
+            // mode: random
+            else if (currentMode == "random") {
+                let randomColor = Math.floor(Math.random()*16777215).toString(16);
+                box.style.backgroundColor = "#" + randomColor
+            }
         })
     })
 }

@@ -38,3 +38,8 @@ main {
     grid-template-columns: repeat(50, 1fr);
     grid-template-rows: repeat(30, 1fr);
 }
+
+.fade-in {
+    transition: background-color 1s;
+    background-color: #ffffff;
+}
