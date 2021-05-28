@@ -84,11 +84,9 @@ switchBtn.addEventListener("click", () => {
         nextIndex = 0
     } 
     currentMode = modes[nextIndex]
-
-    document.querySelector(".mode").innerHTML = currentMode
-
-    let boxes = document.querySelectorAll(".box")
+    
     // remove all modes classes
+    let boxes = document.querySelectorAll(".box")
     boxes.forEach(box => {
         box.classList.remove("fade-in")
     })
