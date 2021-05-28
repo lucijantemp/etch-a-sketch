@@ -20,8 +20,8 @@ const switchBtn = document.querySelector("#switch")
 
 // current color and mode (will dynamicly change)
 let currentColor = "black"
-let currentMode = "fadeIn"
-const modes = ["default", "fadeIn", "random"]
+let currentMode = "default"
+const modes = ["default", "random", "fadeIn"]
 
 
 
