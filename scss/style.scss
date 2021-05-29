@@ -32,6 +32,13 @@ main {
     grid-template-rows: repeat(30, 1fr);
 }
 
+
+// mode classes
 .fade {
-    transition: background-color 1s;
+    transition: background-color 1000ms 250ms;
+}
+
+.rotate {
+    transition: transform 1000ms;
+    transform: rotate(360deg);
 }

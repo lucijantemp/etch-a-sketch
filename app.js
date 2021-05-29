@@ -4,12 +4,13 @@
 const numberDefault = 1500
 const defaultCols = 50
 const defaultRows = 30
-const maxProduct = 10000
+const maxRows = 120
+const maxCols = 120
 
 // select all color buttons
 const colorBtns = document.querySelectorAll(".btn-color");
 
-// select container for boxes
+// select container for boxes and boxes
 const container = document.querySelector(".container")
 
 // select feature btns
@@ -21,7 +22,7 @@ const switchBtn = document.querySelector("#switch")
 // current color and mode (will dynamicly change)
 let currentColor = "black"
 let currentMode = "default"
-const modes = ["default", "random", "fadeIn"]
+const modes = ["default", "random", "fadeIn", "rotate"]
 
 
 
@@ -39,7 +40,7 @@ colorBtns.forEach(button => {
         if (selectedBtn) { selectedBtn.classList.remove("btn-active") }
         button.classList.add("btn-active")
         // update hover listener for boxes
-        hoverListener(currentColor)
+        hoverListener()
     })
 })
 
@@ -50,24 +51,35 @@ addAllBoxes(defaultRows, defaultCols)
 
 // ---BUTTON FUNCTIONALITIES---
 
+// CLEAR btn
+clearBtn.addEventListener("click", () => {
+    // reset classes and fill grid with white
+    let boxes = document.querySelectorAll(".box")
+    removeClasses(boxes)
+    fillGrid("#ffffff")
+})
+
 // RESET btn
 resetBtn.addEventListener("click", () => {
     // get information about wanted rows and cols
-    let rows = window.prompt(`Please enter number of rows. \nDefault-rows: ${defaultRows}\nMax-product: ${maxProduct}\nMin-rows: 1`)
-    let cols = window.prompt(`Please enter number of columns. \nDefault-cols: ${defaultCols}\nMax-product: ${maxProduct}\nMin-rows: 1`)
-    // update grid templates
-    container.setAttribute("style", `width: 95vw; height: 100vh; background-color: #ffffff; display: grid; grid-template-columns: repeat(${cols}, 1fr); grid-template-rows: repeat(${rows}, 1fr);`)
-    // remove old boxes
-    removeAllBoxes()
-    // generate new boxes
-    addAllBoxes(rows, cols)
-    // update hover listener
-    hoverListener(currentColor)
-})
-
-// CLEAR btn
-clearBtn.addEventListener("click", () => {
-    fillGrid("#ffffff")
+    let rows = window.prompt(`Please enter number of rows. \nDefault: ${defaultRows}\nMax: ${maxRows}\nMin: 1`)
+    let cols = window.prompt(`Please enter number of columns. \nDefault: ${defaultCols}\nMax: ${maxCols}\nMin-rows: 1`)
+    // check if input is valid
+    if (!(rows <= 0 || cols <= 0 || rows > maxRows || cols > maxCols)) {
+        // update grid templates
+        container.setAttribute("style", `width: 95vw; height: 100vh; background-color: #ffffff; display: grid; grid-template-columns: repeat(${cols}, 1fr); grid-template-rows: repeat(${rows}, 1fr);`)
+        // remove old boxes
+        removeAllBoxes()
+        // generate new boxes
+        addAllBoxes(rows, cols)
+        // update hover listener
+        hoverListener()
+        // remove classes from boxes
+        let boxes = document.querySelectorAll(".box")
+        removeClasses(boxes)
+    }
+    addAllBoxes(defaultRows, defaultCols)
+    
 })
 
 // FILL btn
@@ -87,11 +99,8 @@ switchBtn.addEventListener("click", () => {
     
     // remove all modes classes
     let boxes = document.querySelectorAll(".box")
-    boxes.forEach(box => {
-        box.classList.remove("fade")
-    })
+    removeClasses(boxes)
 })
-
 
 
 // ---FUNCTIONS---
@@ -107,11 +116,7 @@ function removeAllBoxes () {
 // function for generating new btns 
 function addAllBoxes(rows, cols) {
     let number = rows * cols
-    // set a default value if input is omitted or number is too big
-    if (number <= 0 || number > maxProduct) {
-        number = numberDefault
-        container.setAttribute("style", `width: 95vw; height: 100vh; background-color: #ffffff; display: grid; grid-template-columns: repeat(${defaultCols}, 1fr); grid-template-rows: repeat(${defaultRows}, 1fr);`)
-    }
+    // apend boxes
     for (let i=0; i<(number); i++) {
         let box = document.createElement("div")
         box.classList.add("box")
@@ -120,33 +125,45 @@ function addAllBoxes(rows, cols) {
 }
 
 // function that adds to each element hover event listener and change bg
-function hoverListener(color) {
+function hoverListener() {
     // select boxes
     let boxes = document.querySelectorAll(".box")
     boxes.forEach(box => {
         box.addEventListener("mouseover", () => {
-            // mode: classic
-            if (currentMode == "default") {
-                box.style.backgroundColor = color
-            }
-            // mode: fadeIn
-            else if (currentMode == "fadeIn") {
-                box.style.backgroundColor = color
-                box.classList.add("fade")
-            }
-            // mode: random
-            else if (currentMode == "random") {
-                let randomColor = Math.floor(Math.random()*16777215).toString(16);
-                box.style.backgroundColor = "#" + randomColor
+            // handle different modes
+            switch (currentMode) {
+                case "default":
+                    box.style.backgroundColor = currentColor
+                    break
+                case "random":
+                    let randomColor = Math.floor(Math.random()*16777215).toString(16);
+                    box.style.backgroundColor = "#" + randomColor
+                    break
+                case "fadeIn":
+                    box.style.backgroundColor = currentColor
+                    box.classList.add("fade")
+                    break
+                case "rotate":
+                    box.classList.add("rotate")
+                    box.style.backgroundColor = currentColor
+                    break
             }
         })
     })
 }
 
-// function that clears the grid from colors
+// function that fills grid with desired color
 function fillGrid(color) {
     let boxes = document.querySelectorAll(".box")
     boxes.forEach(box => {
         box.style.backgroundColor = color
+    })
+}
+
+// function that removes mode classes from every box
+function removeClasses(list) {
+    list.forEach(box => {
+        box.classList.remove("fade")
+        box.classList.remove("rotate")
     })
 }
