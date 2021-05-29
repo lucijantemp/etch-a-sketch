@@ -32,7 +32,6 @@ main {
     grid-template-rows: repeat(30, 1fr);
 }
 
-.fade-in {
+.fade {
     transition: background-color 1s;
-    background-color: #ffffff;
 }

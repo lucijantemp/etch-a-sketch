@@ -88,7 +88,7 @@ switchBtn.addEventListener("click", () => {
     // remove all modes classes
     let boxes = document.querySelectorAll(".box")
     boxes.forEach(box => {
-        box.classList.remove("fade-in")
+        box.classList.remove("fade")
     })
 })
 
@@ -132,7 +132,7 @@ function hoverListener(color) {
             // mode: fadeIn
             else if (currentMode == "fadeIn") {
                 box.style.backgroundColor = color
-                box.classList.add("fade-in")
+                box.classList.add("fade")
             }
             // mode: random
             else if (currentMode == "random") {
