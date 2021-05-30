@@ -131,8 +131,8 @@ function removeAllBoxes () {
 // function for generating new btns 
 function addAllBoxes(rows, cols) {
     let number = rows * cols
-    // apend boxes
-    for (let i=0; i<(number); i++) {
+    // append boxes
+    for (let i=0; i<number; i++) {
         let box = document.createElement("div")
         box.classList.add("box")
         container.appendChild(box)
