@@ -14,15 +14,16 @@ const colorBtns = document.querySelectorAll(".btn-color");
 const container = document.querySelector(".container")
 
 // select feature btns
-const resetBtn = document.querySelector("#reset")
+const changeBtn = document.querySelector("#change")
 const clearBtn = document.querySelector("#clear")
 const fillBtn  = document.querySelector("#fill")
 const switchBtn = document.querySelector("#switch")
 
-// current color and mode (will dynamicly change)
+// current color, mode (will dynamicly change) and mode message
 let currentColor = "black"
 let currentMode = "default"
-const modes = ["default", "random", "fadeIn", "rotate"]
+const modes = ["default", "random", "fade", "rotate"]
+const modeMsg = document.querySelector(".mode-msg")
 
 
 
@@ -60,7 +61,7 @@ clearBtn.addEventListener("click", () => {
 })
 
 // RESET btn
-resetBtn.addEventListener("click", () => {
+changeBtn.addEventListener("click", () => {
     // get information about wanted rows and cols
     let rows = window.prompt(`Please enter number of rows. \nDefault: ${defaultRows}\nMax: ${maxRows}\nMin: 1`)
     let cols = window.prompt(`Please enter number of columns. \nDefault: ${defaultCols}\nMax: ${maxCols}\nMin-rows: 1`)
@@ -100,7 +101,21 @@ switchBtn.addEventListener("click", () => {
     // remove all modes classes
     let boxes = document.querySelectorAll(".box")
     removeClasses(boxes)
+
+    // display mode message
+    modeMsg.innerHTML = currentMode
+    modeMsg.style.zIndex = 1
+    modeMsg.style.opacity = 0
+    switchBtn.disabled = true
+    setTimeout(() => {
+        modeMsg.style.zIndex = -1
+        modeMsg.style.opacity = 1
+    }, 1000)
+    setTimeout(() => {
+        switchBtn.disabled = false
+    }, 1500)
 })
+
 
 
 // ---FUNCTIONS---
@@ -139,7 +154,7 @@ function hoverListener() {
                     let randomColor = Math.floor(Math.random()*16777215).toString(16);
                     box.style.backgroundColor = "#" + randomColor
                     break
-                case "fadeIn":
+                case "fade":
                     box.style.backgroundColor = currentColor
                     box.classList.add("fade")
                     break

@@ -32,6 +32,16 @@ main {
     grid-template-rows: repeat(30, 1fr);
 }
 
+.mode-msg {
+    font-size: 3rem;
+    position: absolute;
+    z-index: -1;
+    opacity: 1;
+    top: 45%;
+    left: 45%;
+    text-transform: uppercase;
+    transition: opacity 1000ms;
+}
 
 // mode classes
 .fade {
