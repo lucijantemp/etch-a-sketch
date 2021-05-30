@@ -44,7 +44,7 @@ main {
         left: 50%;
         transform: translate(-50%, -50%);
     text-transform: uppercase;
-    transition: opacity 1250ms;
+    transition: opacity 500ms;
 }
 
 // change display because of unwanted gaps caused by transform: rotate...
