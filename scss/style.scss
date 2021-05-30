@@ -40,7 +40,12 @@ main {
     top: 45%;
     left: 45%;
     text-transform: uppercase;
-    transition: opacity 1000ms;
+    transition: opacity 1250ms;
+}
+
+// change display because of unwanted gaps caused by transform: rotate...
+.box {
+    display: block;
 }
 
 // mode classes

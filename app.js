@@ -110,10 +110,10 @@ switchBtn.addEventListener("click", () => {
     setTimeout(() => {
         modeMsg.style.zIndex = -1
         modeMsg.style.opacity = 1
-    }, 1000)
+    }, 1250)
     setTimeout(() => {
         switchBtn.disabled = false
-    }, 1500)
+    }, 1750)
 })
 
 
