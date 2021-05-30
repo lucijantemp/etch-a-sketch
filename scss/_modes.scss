@@ -36,19 +36,23 @@
 @mixin crazy($xaxis, $yaxis) {
     @keyframes crazy {
         20% {
-            transform: translateX($xaxis);
+            transform: translateX($xaxis) scale(0.2);
+            border-radius: 50%;
         }
         40% {
-            transform: translateY($xaxis);
+            transform: translateY($xaxis) scale(0.2);
+            
         }
         60% {
-            transform: translateX(-$yaxis);
+            transform: translateX(-$yaxis) scale(0.2);
         }
         80% {
-            transform: translateY(-$yaxis);
+            transform: translateY(-$yaxis) scale(0.2);
+            border-radius: 50%;
         }
         100% {
-            transform: translate(0);
+            transform: translate(0) scale(1);
+            border-radius: 0;
         }
     }
 }

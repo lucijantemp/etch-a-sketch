@@ -60,7 +60,7 @@ clearBtn.addEventListener("click", () => {
     fillGrid("#ffffff")
 })
 
-// RESET btn
+// CHANGE btn
 changeBtn.addEventListener("click", () => {
     // get information about wanted rows and cols
     let rows = window.prompt(`Please enter number of rows. \nDefault: ${defaultRows}\nMax: ${maxRows}\nMin: 1`)
@@ -78,13 +78,19 @@ changeBtn.addEventListener("click", () => {
         // remove classes from boxes
         let boxes = document.querySelectorAll(".box")
         removeClasses(boxes)
+    } 
+    // if input is not valid set default values
+    else {
+        addAllBoxes(defaultRows, defaultCols)
     }
-    addAllBoxes(defaultRows, defaultCols)
+    
     
 })
 
 // FILL btn
 fillBtn.addEventListener("click", () => {
+    let boxes = document.querySelectorAll(".box")
+    removeClasses(boxes)
     fillGrid(currentColor)
 })
 
@@ -186,9 +192,8 @@ function fillGrid(color) {
 // function that removes mode classes from every box
 function removeClasses(list) {
     list.forEach(box => {
-        box.classList.remove("fade")
-        box.classList.remove("rotate")
-        box.classList.remove("jump")
-        box.classList.remove("crazy")
+        for (let i=0; i<modes.length; i++) {
+            box.classList.remove(modes[i])
+        }
     })
 }
