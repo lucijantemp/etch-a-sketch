@@ -1,0 +1,61 @@
+// mode classes
+// mode: fade
+.fade {
+    transition: background-color 1000ms 250ms;
+}
+
+// mode: rotate
+.rotate {
+    transition: transform 1000ms;
+    transform: rotate(360deg);
+}
+
+// mode: jump
+.jump {
+    animation: jumper 1000ms;
+}
+
+@keyframes jumper {
+    25% {
+        transform: scale(1.5);
+    }
+    50% {
+        transform: scale(1);
+        border-radius: 50%;
+    }
+    75% {
+        transform: scale(0.25);
+    }
+    100% {
+        transform: scale(1);
+        border-radius: 0;
+    }
+}
+
+// mode: crazy
+@mixin crazy($xaxis, $yaxis) {
+    @keyframes crazy {
+        20% {
+            transform: translateX($xaxis);
+        }
+        40% {
+            transform: translateY($xaxis);
+        }
+        60% {
+            transform: translateX(-$yaxis);
+        }
+        80% {
+            transform: translateY(-$yaxis);
+        }
+        100% {
+            transform: translate(0);
+        }
+    }
+}
+
+.crazy {
+    animation: crazy 2000ms;
+    @include crazy(40px, 40px);
+}
+
+

@@ -22,7 +22,7 @@ const switchBtn = document.querySelector("#switch")
 // current color, mode (will dynamicly change) and mode message
 let currentColor = "black"
 let currentMode = "default"
-const modes = ["default", "random", "fade", "rotate"]
+const modes = ["default", "random", "fade", "rotate", "jump", "crazy"]
 const modeMsg = document.querySelector(".mode-msg")
 
 
@@ -159,8 +159,16 @@ function hoverListener() {
                     box.classList.add("fade")
                     break
                 case "rotate":
-                    box.classList.add("rotate")
                     box.style.backgroundColor = currentColor
+                    box.classList.add("rotate")
+                    break
+                case "jump":
+                    box.style.backgroundColor = currentColor
+                    box.classList.add("jump")
+                    break
+                case "crazy":
+                    box.style.backgroundColor = currentColor
+                    box.classList.add("crazy")
                     break
             }
         })
@@ -180,5 +188,7 @@ function removeClasses(list) {
     list.forEach(box => {
         box.classList.remove("fade")
         box.classList.remove("rotate")
+        box.classList.remove("jump")
+        box.classList.remove("crazy")
     })
 }
