@@ -83,10 +83,6 @@ changeBtn.addEventListener("click", () => {
     let boxes = document.querySelectorAll(".box");
     removeClasses(boxes);
   }
-  // if input is not valid set default values
-  else {
-    addAllBoxes(defaultRows, defaultCols);
-  }
 });
 
 // FILL btn
